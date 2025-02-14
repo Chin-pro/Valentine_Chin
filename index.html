@@ -29,7 +29,17 @@
             transition: all 0.5s ease-in-out;
         }
 
-        button {
+        .button-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .main-button {
             padding: 15px 30px;
             font-size: 20px;
             color: white;
@@ -38,30 +48,80 @@
             border-radius: 10px;
             cursor: pointer;
             transition: 0.3s;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
         }
 
-        button:hover {
+        .main-button:hover {
             background: #ff1e56;
         }
 
         #roseImage {
             display: none;
-            width: 300px; /* 初始大小 */
+            width: 300px;
             transition: transform 0.5s ease-in-out, width 0.5s ease-in-out;
             border-radius: 10px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 讓紅色的對話框按鈕變小，並放在主按鈕旁邊 */
+        .chat-button {
+            background: rgba(255, 77, 109, 0.8);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s;
+        }
+
+        .chat-button:hover {
+            background: rgba(255, 30, 86, 0.9);
+        }
+
+        /* 透明對話框 */
+        .chat-box {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 15px;
+            border-radius: 10px;
+            max-width: 250px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            font-size: 14px;
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+        }
+
+        .chat-box.show {
+            opacity: 1;
+            transform: scale(1);
         }
     </style>
 </head>
 <body>
 
     <h1 id="title">Happy Valentine's Day</h1>
-    <button id="revealBtn" onclick="showImage()">Click to Reveal Roses</button>
+
+    <!-- 主要按鈕區域 (Click to Reveal Roses + 對話框按鈕) -->
+    <div class="button-container">
+        <button class="main-button" id="revealBtn" onclick="showImage()">Click to Reveal Roses</button>
+        <button class="chat-button" onclick="toggleChat()">💌</button>
+    </div>
+
     <img id="roseImage" src="bouquet.png" alt="Valentine's Day Roses">
+
+    <!-- 透明對話框 -->
+    <div id="chatBox" class="chat-box">
+        認識你雖然不久，有時候我也會擔心交淺言深，<br>
+        但可能是默契吧！覺得跟你聊天很有趣，逗你也挺好玩的！<br><br>
+        昨天，可能有些不開心的事，<br>
+        今天送你這個禮物吧！🎁<br><br>
+        我第一次做網頁，加上晚上才動工，<br>
+        難免粗糙，但禮輕情意重，對吧！？ 😊
+    </div>
 
     <script>
         function showImage() {
@@ -94,6 +154,15 @@
                 document.body.style.backgroundColor = colors[index];
                 index = (index + 1) % colors.length;
             }, 3000); // 每3秒變色
+        }
+
+        function toggleChat() {
+            let chatBox = document.getElementById("chatBox");
+            if (chatBox.classList.contains("show")) {
+                chatBox.classList.remove("show");
+            } else {
+                chatBox.classList.add("show");
+            }
         }
     </script>
 
