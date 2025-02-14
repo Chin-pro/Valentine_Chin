@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #ffccd5; /* 初始背景色 */
+            transition: background 3s ease-in-out;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 36px;
+            color: #ff4d6d;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.5s ease-in-out;
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 20px;
+            color: white;
+            background: #ff4d6d;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        button:hover {
+            background: #ff1e56;
+        }
+
+        #roseImage {
+            display: none;
+            width: 300px; /* 初始大小 */
+            transition: transform 0.5s ease-in-out, width 0.5s ease-in-out;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="title">Happy Valentine's Day</h1>
+    <button id="revealBtn" onclick="showImage()">Click to Reveal Roses</button>
+    <img id="roseImage" src="bouquet.png" alt="Valentine's Day Roses">
+
+    <script>
+        function showImage() {
+            let img = document.getElementById("roseImage");
+            let title = document.getElementById("title");
+            let button = document.getElementById("revealBtn");
+
+            // 顯示圖片並放大 50%
+            img.style.display = "block";
+            img.style.width = "450px"; // 原本300px，加大50%為450px
+            img.style.transform = "scale(1.1)";
+
+            // 隱藏按鈕
+            button.style.display = "none";
+
+            // 移動標題到左上角
+            title.style.top = "20px";
+            title.style.left = "20px";
+            title.style.transform = "none";
+            title.style.fontSize = "28px";
+
+            // 變換背景顏色
+            changeBackground();
+        }
+
+        function changeBackground() {
+            const colors = ["#ffccd5", "#ffadad", "#ffc3a0", "#ff85a2", "#ff708d"];
+            let index = 0;
+            setInterval(() => {
+                document.body.style.backgroundColor = colors[index];
+                index = (index + 1) % colors.length;
+            }, 3000); // 每3秒變色
+        }
+    </script>
+
+</body>
+</html>
